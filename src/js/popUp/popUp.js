@@ -1,12 +1,4 @@
-const popUpData = {
-  phone: "83991616485",
-  maquiagem_social: {
-    text: "Olá, gostaria de agendar um horário para maquiagem social.",
-  },
-  maquiagem_social_babyliss: {
-    text: "Olá, gostaria de agendar um horário para maquiagem social + babyliss.",
-  },
-}
+import popUpData from "./popUpData.js"
 
 const buttonsOpenPopUp = document.querySelectorAll(".menu li[data-name]")
 
@@ -17,8 +9,8 @@ buttonsOpenPopUp.forEach((button) => {
 function handleOpenPopUp(event) {
   const { name } = event.target.parentElement.dataset
   openPopUp(name)
-  addCloseButtonListener()
   addItemsListeners()
+  addCloseButtonListener()
 }
 
 function addCloseButtonListener() {
@@ -29,9 +21,13 @@ function addCloseButtonListener() {
 }
 function openPopUp(data) {
   const popUp = document.createElement("div")
+  const popUpContent = getPopUpContent(data)
   popUp.classList.add("pop-up")
-  popUp.innerHTML = getPopUpContent(data)
-  document.body.appendChild(popUp)
+
+  if (popUpContent) {
+    popUp.innerHTML = popUpContent
+    document.body.appendChild(popUp)
+  }
 }
 
 function closePopUp() {
@@ -39,14 +35,13 @@ function closePopUp() {
   if (popUp) {
     const popUpContent = popUp.querySelector(".pop-up-content")
     popUpContent.classList.add("fade-out")
-    popUpContent.addEventListener(
-      "animationend",
-      () => {
-        popUp.style = "display: none"
-        popUp.remove()
-      },
-      { once: true }
-    )
+
+    popUpContent.addEventListener("animationend", handleAnimationEnd, { once: true })
+  }
+
+  function handleAnimationEnd() {
+    popUp.style = "display: none"
+    popUp.remove()
   }
 }
 
@@ -68,24 +63,28 @@ function navigateTo(url) {
 }
 
 function getPopUpContent(data) {
-  const content = {
-    agendamento: `<div class="pop-up-content fade-in">
-                    <span class="pop-up-title">Selecione a opção desejada:</span>
-                    <ul>
-                      <li data-name="maquiagem_social">Maquiagem social</li>
-                      <li data-name="maquiagem_social_babyliss">Maquiagem social + babyliss</li>
-                    </ul>
-                    <a class="btn-close">Voltar</a>
-                  </div>`,
-    curso_maquiagem: `<div class="pop-up-content fade-in">
-                          <p class="indisponivel">* Indisponível no momento</p>                         
-                          <a class="btn-close">Voltar</a>
-                        </div>`,
-    portifolio: `<div class="pop-up-content fade-in">
-                  <p class="indisponivel">* Portifólio indisponível (em atualização)</p>                         
-                  <a class="btn-close">Voltar</a>
-                </div>`,
+  if (data === "agendamento") {
+    return `<div class="pop-up-content fade-in">
+              <span class="pop-up-title">Selecione a opção desejada:</span>
+              <ul>
+                <li data-name="maquiagem_social">Maquiagem social</li>
+                <li data-name="maquiagem_social_babyliss">Maquiagem social + babyliss</li>
+              </ul>
+              <a class="btn-close">Voltar</a>
+            </div>`
+  }
+  if (data === "curso_maquiagem") {
+    return `<div class="pop-up-content fade-in">
+              <p class="indisponivel">* Indisponível no momento</p>                         
+              <a class="btn-close">Voltar</a>
+            </div>`
+  }
+  if (data === "portifolio") {
+    return `<div class="pop-up-content fade-in">
+              <p class="indisponivel">* Portifólio indisponível (em atualização)</p>                         
+              <a class="btn-close">Voltar</a>
+            </div>`
   }
 
-  return content[data]
+  return
 }
