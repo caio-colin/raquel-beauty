@@ -39,7 +39,14 @@ function closePopUp() {
   if (popUp) {
     const popUpContent = popUp.querySelector(".pop-up-content")
     popUpContent.classList.add("fade-out")
-    popUpContent.addEventListener("animationend", () => popUp.remove(), { once: true })
+    popUpContent.addEventListener(
+      "animationend",
+      () => {
+        popUp.style = "display: none"
+        popUp.remove()
+      },
+      { once: true }
+    )
   }
 }
 
