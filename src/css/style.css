@@ -1,0 +1,100 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
+@import url(../js/popUp/popup.css);
+
+body {
+  font-family: "Inter", sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(45deg, #1e1010 0%, #4a3e3e 100%);
+}
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+.container .img {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1rem;
+  outline: 4px solid rgba(29, 15, 15, 0.65);
+}
+.container .title {
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: rgb(255, 255, 255);
+}
+.container .subtitle {
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+}
+.container .menu,
+.pop-up .pop-up-content ul {
+  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  color: #ffffff;
+}
+.container .menu li,
+.pop-up .pop-up-content li {
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 4px 0px;
+  background-color: rgba(66, 51, 51, 0.6);
+  border-radius: 4px;
+  transition: all ease-in-out 0.1s;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Standard syntax */
+}
+.container .menu li:hover,
+.pop-up .pop-up-content li:hover {
+  background-color: rgba(29, 15, 15, 0.65);
+  transform: scale(1.01);
+}
+@media screen and (min-width: 768px) {
+  .container .menu li:active,
+  .pop-up .pop-up-content ul li:active {
+    background-color: rgba(29, 15, 15, 0.9);
+  }
+}
+.container .menu li a,
+.pop-up .pop-up-content li {
+  display: block;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 1rem 1rem;
+}
+.container .social {
+  color: #ffff;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+.container .social a {
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  transition: outline ease-in-out 0.1s;
+  outline-color: rgba(0, 0, 0, 0.1);
+}
+.container .social a:hover {
+  outline: 0.5rem solid rgba(0, 0, 0, 0.1);
+}
+.container .social i {
+  font-size: 1.5rem;
+}
+.footer {
+  margin-bottom: 0.5rem;
+}
+.footer .footer-text {
+  font-size: 0.7rem;
+  text-align: center;
+  color: #cecece;
+}
